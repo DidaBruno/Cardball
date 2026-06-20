@@ -11,17 +11,18 @@ extends CharacterBody2D
 @export var double_tap_window: float = 0.25
 @export var dash_cooldown: float = 0.5
 @export var kick_force: float = 600.0
+@export var player_push_force: float = 5000.0
+@export var ball_push_force: float = 40
 
 @onready var kick_zone: Area2D = $KickZone
 @onready var sprite: Sprite2D = $Sprite2D
 
 var dash_timer: float = 0.0
 var dash_direction: float = 0.0
-
 var last_left_press_time: float = -1.0
 var last_right_press_time: float = -1.0
-
 var dash_cooldown_timer: float = 0.0
+var external_push: float = 0.0
 
 func _ready() -> void:
 	kick_zone.position.x = abs(kick_zone.position.x) * facing_direction
@@ -60,11 +61,16 @@ func _physics_process(delta: float) -> void:
 	else:
 		var direction := Input.get_axis(input_prefix + "_left", input_prefix + "_right")
 		velocity.x = direction * speed
+	
+	velocity.x += external_push
+	external_push = 0.0
 
 	move_and_slide()
 	
 	if Input.is_action_just_pressed(input_prefix + "_kick"):
 		_try_kick()
+	
+	_check_player_push()
 
 func _start_dash(direction:float) -> void:
 	dash_direction = direction
@@ -76,3 +82,18 @@ func _try_kick() -> void:
 		if body is RigidBody2D:
 			var kick_direction := (body.global_position - global_position).normalized()
 			body.apply_central_impulse(kick_direction * kick_force)
+
+func _check_player_push() -> void:
+	for i in get_slide_collision_count():
+		var collision := get_slide_collision(i)
+		var collider := collision.get_collider()
+		
+		if collider is CharacterBody2D:
+			var other_player: CharacterBody2D = collider
+			var push_direction := (other_player.global_position - global_position).normalized()
+			other_player.external_push += push_direction.x * player_push_force * get_physics_process_delta_time()
+		
+		elif collider is RigidBody2D:
+			var ball: RigidBody2D = collider
+			var push_direction := (ball.global_position - global_position).normalized()
+			ball.apply_central_impulse(push_direction * ball_push_force)
