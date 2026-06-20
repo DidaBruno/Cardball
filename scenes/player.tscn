@@ -10,6 +10,8 @@ size = Vector2(40, 60)
 radius = 20.0
 
 [node name="Player" type="CharacterBody2D" unique_id=950440051]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_onrkg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1029359793]
@@ -22,6 +24,7 @@ texture = ExtResource("2_g2els")
 
 [node name="KickZone" type="Area2D" parent="." unique_id=369936069]
 position = Vector2(25, 0)
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KickZone" unique_id=1892684469]
 position = Vector2(0, 10)

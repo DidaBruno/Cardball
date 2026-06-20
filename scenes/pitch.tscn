@@ -4,44 +4,51 @@
 [ext_resource type="PackedScene" uid="uid://dg5os33emlcoa" path="res://scenes/ball.tscn" id="2_2msfa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1p4y"]
-size = Vector2(2000, 40)
+size = Vector2(2000, 286)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_he2tf"]
-size = Vector2(20, 593)
+size = Vector2(345, 1144.5)
 
 [node name="Pitch" type="Node2D" unique_id=1066713230]
 
 [node name="Player" parent="." unique_id=950440051 instance=ExtResource("1_jcxhh")]
-position = Vector2(312, 240)
+position = Vector2(111, 221)
 
 [node name="Player2" parent="." unique_id=1264549729 instance=ExtResource("1_jcxhh")]
-position = Vector2(747, 241)
+position = Vector2(1061, 335)
 input_prefix = "p2"
 facing_direction = -1.0
 
 [node name="Ball" parent="." unique_id=1018734880 instance=ExtResource("2_2msfa")]
-position = Vector2(565, 228)
+position = Vector2(169, 185)
 
 [node name="Ground" type="StaticBody2D" parent="." unique_id=248817652]
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=512961480]
-position = Vector2(520, 420)
+position = Vector2(520, 543)
 shape = SubResource("RectangleShape2D_y1p4y")
 
 [node name="Wall" type="StaticBody2D" parent="." unique_id=1614488168]
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall" unique_id=484474597]
-position = Vector2(0, 103.5)
-shape = SubResource("RectangleShape2D_he2tf")
-
-[node name="Wall2" type="StaticBody2D" parent="." unique_id=711405728]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2" unique_id=848090218]
-position = Vector2(1152, 103)
+position = Vector2(-162.5, 103.5)
 shape = SubResource("RectangleShape2D_he2tf")
 
 [node name="Ground2" type="StaticBody2D" parent="." unique_id=994460358]
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground2" unique_id=245848016]
-position = Vector2(540, -213)
+position = Vector2(527, -339)
 shape = SubResource("RectangleShape2D_y1p4y")
+
+[node name="Wall2" type="StaticBody2D" parent="." unique_id=2039942065]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2" unique_id=1683509067]
+position = Vector2(1301, 106)
+shape = SubResource("RectangleShape2D_he2tf")
+
+[node name="Wall3" type="StaticBody2D" parent="." unique_id=1400229397]
+collision_mask = 0

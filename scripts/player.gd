@@ -11,8 +11,7 @@ extends CharacterBody2D
 @export var double_tap_window: float = 0.25
 @export var dash_cooldown: float = 0.5
 @export var kick_force: float = 600.0
-@export var player_push_force: float = 5000.0
-@export var ball_push_force: float = 40
+@export var push_force: float = 5000.0
 
 @onready var kick_zone: Area2D = $KickZone
 @onready var sprite: Sprite2D = $Sprite2D
@@ -91,9 +90,4 @@ func _check_player_push() -> void:
 		if collider is CharacterBody2D:
 			var other_player: CharacterBody2D = collider
 			var push_direction := (other_player.global_position - global_position).normalized()
-			other_player.external_push += push_direction.x * player_push_force * get_physics_process_delta_time()
-		
-		elif collider is RigidBody2D:
-			var ball: RigidBody2D = collider
-			var push_direction := (ball.global_position - global_position).normalized()
-			ball.apply_central_impulse(push_direction * ball_push_force)
+			other_player.external_push += push_direction.x * push_force * get_physics_process_delta_time()
