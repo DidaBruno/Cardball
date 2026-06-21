@@ -12,6 +12,8 @@ extends CharacterBody2D
 @export var dash_cooldown: float = 0.5
 @export var kick_force: float = 1200.0
 @export var push_force: float = 5000.0
+@export var ability: Ability
+@export var ability_fill_per_kick: float = 0.25
 
 @onready var kick_zone: Area2D = $KickZone
 @onready var sprite: Sprite2D = $Sprite2D
@@ -22,6 +24,9 @@ var last_left_press_time: float = -1.0
 var last_right_press_time: float = -1.0
 var dash_cooldown_timer: float = 0.0
 var external_push: float = 0.0
+
+var ability_charge: float = 0.0
+var speed_modifier: float = 1.0
 
 func _ready() -> void:
 	kick_zone.position.x = abs(kick_zone.position.x) * facing_direction
@@ -59,7 +64,7 @@ func _physics_process(delta: float) -> void:
 	# If there are no double taps, move normally
 	else:
 		var direction := Input.get_axis(input_prefix + "_left", input_prefix + "_right")
-		velocity.x = direction * speed
+		velocity.x = direction * speed * speed_modifier
 	
 	velocity.x += external_push
 	external_push = 0.0
@@ -70,6 +75,15 @@ func _physics_process(delta: float) -> void:
 		_try_kick()
 	
 	_check_player_push()
+	
+	# Ability system
+	if ability:
+		ability.tick(self, delta)
+	
+	if Input.is_action_just_pressed(input_prefix + "_ability") and ability_charge >= 1.0:
+		ability_charge = 0.0
+		if ability:
+			ability.activate(self)
 
 func _start_dash(direction:float) -> void:
 	dash_direction = direction
@@ -81,6 +95,7 @@ func _try_kick() -> void:
 		if body is RigidBody2D:
 			var kick_direction := (body.global_position - global_position).normalized()
 			body.apply_central_impulse(kick_direction * kick_force)
+			ability_charge = min(ability_charge + ability_fill_per_kick, 1.0)
 
 func _check_player_push() -> void:
 	for i in get_slide_collision_count():

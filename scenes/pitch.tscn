@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://hpx1ws17su4m" path="res://scenes/player.tscn" id="1_jcxhh"]
 [ext_resource type="PackedScene" uid="uid://dg5os33emlcoa" path="res://scenes/ball.tscn" id="2_2msfa"]
 [ext_resource type="Texture2D" uid="uid://kv83rbx6650j" path="res://temp_assets/player2.png" id="3_gj5o7"]
+[ext_resource type="Resource" uid="uid://jakurp1p6p0i" path="res://scripts/abilities/france/speedy.tres" id="3_ngpjf"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7s4qf"]
 friction = 0.5
@@ -36,10 +37,11 @@ size = Vector2(60, 10)
 [node name="Pitch" type="Node2D" unique_id=1066713230]
 script = ExtResource("1_dwiy3")
 
-[node name="Player1" parent="." unique_id=950440051 groups=["players"] instance=ExtResource("1_jcxhh")]
+[node name="Player1" parent="." unique_id=950440051 instance=ExtResource("1_jcxhh")]
 position = Vector2(160, 508)
+ability = ExtResource("3_ngpjf")
 
-[node name="Player2" parent="." unique_id=1264549729 groups=["players"] instance=ExtResource("1_jcxhh")]
+[node name="Player2" parent="." unique_id=1264549729 instance=ExtResource("1_jcxhh")]
 position = Vector2(992, 508)
 input_prefix = "p2"
 facing_direction = -1.0
@@ -146,10 +148,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 487.0
-offset_top = 20.5
-offset_right = 527.0
-offset_bottom = 43.5
+offset_left = 512.0
+offset_top = 15.0
+offset_right = 552.0
+offset_bottom = 49.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 24
@@ -166,6 +168,42 @@ offset_right = 660.0
 offset_bottom = 49.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+
+[node name="Player1AbilityLabel" type="Label" parent="." unique_id=1663153520]
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 56.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 24
+
+[node name="Player2AbilityLabel" type="Label" parent="." unique_id=37777530]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1104.0
+offset_top = 8.0
+offset_right = 1144.0
+offset_bottom = 31.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 24
+
+[node name="Player1AbilityTimerLabel" type="Label" parent="." unique_id=859902480]
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 56.0
+offset_bottom = 71.0
+theme_override_font_sizes/font_size = 24
+
+[node name="Plyaer2AbilityTimerLabel" type="Label" parent="." unique_id=76195835]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1104.0
+offset_top = 56.0
+offset_right = 1144.0
+offset_bottom = 90.0
+grow_horizontal = 0
 theme_override_font_sizes/font_size = 24
 
 [editable path="Player2"]

@@ -10,6 +10,10 @@ extends Node2D
 @onready var ball: RigidBody2D = $Ball
 @onready var player1_score_label: Label = $Player1ScoreLabel
 @onready var player2_score_label: Label = $Player2ScoreLabel
+@onready var player1_ability_label: Label = $Player1AbilityLabel
+@onready var player2_ability_label: Label = $Player2AbilityLabel
+@onready var player1_ability_timer_label: Label = $Player1AbilityTimerLabel
+@onready var player2_ability_timer_label: Label = $Player2AbilityTimerLabel
 
 var player1_score: int = 0
 var player2_score: int = 0
@@ -34,10 +38,19 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not match_over:
 		var seconds_left := int(floor(match_timer.time_left))
+		seconds_left = max(seconds_left, 0)
 		timer_label.text = str(seconds_left)
-	
+
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().reload_current_scene()
+
+	player1_ability_label.text = str(int(player1.ability_charge * 100)) + "%"
+	player2_ability_label.text = str(int(player2.ability_charge * 100)) + "%"
+	
+	if player1.ability:
+		player1_ability_timer_label.text = "%.1f" % player1.ability.get_time_remaining()
+	if player2.ability:
+		player2_ability_timer_label.text = "%.1f" % player2.ability.get_time_remaining()
 
 func _on_goal_left_entered(body: Node) -> void:
 	if body is RigidBody2D and not match_over:
@@ -59,9 +72,13 @@ func _update_score_labels() -> void:
 func _reset_positions() -> void:
 	player1.global_position = player1_start_pos
 	player1.velocity = Vector2.ZERO
+	if player1.ability:
+		player1.ability.reset(player1)
 
 	player2.global_position = player2_start_pos
 	player2.velocity = Vector2.ZERO
+	if player2.ability:
+		player2.ability.reset(player2)
 
 	var ball_target_pos: Vector2 = ball_start_pos
 

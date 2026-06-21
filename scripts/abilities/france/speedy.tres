@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SpeedyAbility" format=3 uid="uid://jakurp1p6p0i"]
+
+[ext_resource type="Script" uid="uid://buslb43h4bwlx" path="res://scripts/abilities/france/speedy.gd" id="1_jm16j"]
+
+[resource]
+script = ExtResource("1_jm16j")
+ability_name = "Speedy"
+duration = 5.0
+metadata/_custom_type_script = "uid://buslb43h4bwlx"
