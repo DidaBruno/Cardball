@@ -17,10 +17,10 @@ size = Vector2(450, 1600)
 size = Vector2(2053, 450)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75014"]
-size = Vector2(50, 140)
+size = Vector2(50, 130)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ymghq"]
-size = Vector2(50, 140)
+size = Vector2(50, 130)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1ovxn"]
 size = Vector2(60, 10)
@@ -72,14 +72,14 @@ shape = SubResource("RectangleShape2D_iykul")
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GoalLeft" unique_id=911420251]
-position = Vector2(25, 469)
+position = Vector2(25, 474)
 shape = SubResource("RectangleShape2D_75014")
 
 [node name="GoalRight" type="Area2D" parent="." unique_id=1001613810]
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GoalRight" unique_id=140465270]
-position = Vector2(1128, 469)
+position = Vector2(1128, 474)
 shape = SubResource("RectangleShape2D_ymghq")
 
 [node name="GoalLeftRoof" type="StaticBody2D" parent="." unique_id=326324774]

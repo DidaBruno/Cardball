@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://hpx1ws17su4m"]
+
+[ext_resource type="Script" uid="uid://2dl2xmqcd4ro" path="res://scripts/player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://bqqowg4wn25r0" path="res://temp_assets/player.png" id="2_g2els"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y1p4y"]
+size = Vector2(40, 60)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y1p4y"]
+radius = 20.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pbbwa"]
+size = Vector2(40, 60)
+
+[node name="Player" type="CharacterBody2D" unique_id=950440051 groups=["players"]]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_onrkg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1029359793]
+shape = SubResource("RectangleShape2D_y1p4y")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=961878553]
+position = Vector2(4.7683716e-07, 9.536743e-07)
+scale = Vector2(0.99999994, 1)
+texture = ExtResource("2_g2els")
+
+[node name="KickZone" type="Area2D" parent="." unique_id=369936069]
+position = Vector2(25, 0)
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KickZone" unique_id=1892684469]
+position = Vector2(0, 10)
+shape = SubResource("CircleShape2D_y1p4y")
+
+[node name="BallBlocker" type="CharacterBody2D" parent="." unique_id=1887686567]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BallBlocker" unique_id=556350863]
+shape = SubResource("RectangleShape2D_pbbwa")
