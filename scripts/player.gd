@@ -10,7 +10,7 @@ extends CharacterBody2D
 @export var dash_duration: float = 0.15
 @export var double_tap_window: float = 0.25
 @export var dash_cooldown: float = 0.5
-@export var kick_force: float = 600.0
+@export var kick_force: float = 1200.0
 @export var push_force: float = 5000.0
 
 @onready var kick_zone: Area2D = $KickZone

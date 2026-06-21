@@ -1,54 +1,132 @@
 [gd_scene format=3 uid="uid://bbok7alv502ku"]
 
+[ext_resource type="Script" uid="uid://oc4pjx1cnj4c" path="res://scripts/pitch.gd" id="1_dwiy3"]
 [ext_resource type="PackedScene" uid="uid://hpx1ws17su4m" path="res://scenes/player.tscn" id="1_jcxhh"]
 [ext_resource type="PackedScene" uid="uid://dg5os33emlcoa" path="res://scenes/ball.tscn" id="2_2msfa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1p4y"]
-size = Vector2(2000, 286)
+size = Vector2(2052, 450)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_he2tf"]
-size = Vector2(345, 1144.5)
+size = Vector2(450, 1600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pbbwa"]
+size = Vector2(450, 1600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iykul"]
+size = Vector2(2053, 450)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_75014"]
+size = Vector2(50, 140)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ymghq"]
+size = Vector2(50, 140)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ovxn"]
+size = Vector2(60, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mo4ti"]
+size = Vector2(60, 10)
 
 [node name="Pitch" type="Node2D" unique_id=1066713230]
+script = ExtResource("1_dwiy3")
 
-[node name="Player" parent="." unique_id=950440051 instance=ExtResource("1_jcxhh")]
-position = Vector2(111, 221)
+[node name="Player1" parent="." unique_id=950440051 instance=ExtResource("1_jcxhh")]
+position = Vector2(160, 508)
 
 [node name="Player2" parent="." unique_id=1264549729 instance=ExtResource("1_jcxhh")]
-position = Vector2(1061, 335)
+position = Vector2(992, 508)
 input_prefix = "p2"
 facing_direction = -1.0
 
 [node name="Ball" parent="." unique_id=1018734880 instance=ExtResource("2_2msfa")]
-position = Vector2(169, 185)
+position = Vector2(576, 300)
 
 [node name="Ground" type="StaticBody2D" parent="." unique_id=248817652]
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=512961480]
-position = Vector2(520, 543)
+position = Vector2(576, 764)
 shape = SubResource("RectangleShape2D_y1p4y")
 
-[node name="Wall" type="StaticBody2D" parent="." unique_id=1614488168]
+[node name="WallLeft" type="StaticBody2D" parent="." unique_id=1614488168]
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall" unique_id=484474597]
-position = Vector2(-162.5, 103.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft" unique_id=484474597]
+position = Vector2(-225, 189)
 shape = SubResource("RectangleShape2D_he2tf")
 
-[node name="Ground2" type="StaticBody2D" parent="." unique_id=994460358]
-collision_mask = 0
+[node name="WallRight" type="StaticBody2D" parent="." unique_id=1185285730]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground2" unique_id=245848016]
-position = Vector2(527, -339)
-shape = SubResource("RectangleShape2D_y1p4y")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallRight" unique_id=4362257]
+position = Vector2(1378, 189)
+shape = SubResource("RectangleShape2D_pbbwa")
 
-[node name="Wall2" type="StaticBody2D" parent="." unique_id=2039942065]
-collision_mask = 0
+[node name="Roof" type="StaticBody2D" parent="." unique_id=1442912450]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2" unique_id=1683509067]
-position = Vector2(1301, 106)
-shape = SubResource("RectangleShape2D_he2tf")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Roof" unique_id=1016471364]
+position = Vector2(576.5, -386)
+shape = SubResource("RectangleShape2D_iykul")
 
-[node name="Wall3" type="StaticBody2D" parent="." unique_id=1400229397]
-collision_mask = 0
+[node name="GoalLeft" type="Area2D" parent="." unique_id=1887236299]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalLeft" unique_id=911420251]
+position = Vector2(25, 469)
+shape = SubResource("RectangleShape2D_75014")
+
+[node name="GoalRight" type="Area2D" parent="." unique_id=1001613810]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalRight" unique_id=140465270]
+position = Vector2(1128, 469)
+shape = SubResource("RectangleShape2D_ymghq")
+
+[node name="GoalLeftRoof" type="StaticBody2D" parent="." unique_id=326324774]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalLeftRoof" unique_id=1507527709]
+position = Vector2(27.999996, 397.99994)
+rotation = 0.17453294
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("RectangleShape2D_1ovxn")
+
+[node name="GoalRightRoof" type="StaticBody2D" parent="." unique_id=526133753]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalRightRoof" unique_id=1452961263]
+position = Vector2(1125, 397.99994)
+rotation = -0.17453294
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_mo4ti")
+
+[node name="MatchTimer" type="Timer" parent="." unique_id=1022424422]
+wait_time = 60.0
+one_shot = true
+
+[node name="TimerLabel" type="Label" parent="." unique_id=389818637]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 556.0
+offset_top = 20.5
+offset_right = 596.0
+offset_bottom = 43.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+
+[node name="ResultLabel" type="Label" parent="." unique_id=736724627]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 556.0
+offset_top = 207.5
+offset_right = 596.0
+offset_bottom = 274.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
