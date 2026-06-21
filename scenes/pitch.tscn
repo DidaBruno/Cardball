@@ -3,6 +3,11 @@
 [ext_resource type="Script" uid="uid://oc4pjx1cnj4c" path="res://scripts/pitch.gd" id="1_dwiy3"]
 [ext_resource type="PackedScene" uid="uid://hpx1ws17su4m" path="res://scenes/player.tscn" id="1_jcxhh"]
 [ext_resource type="PackedScene" uid="uid://dg5os33emlcoa" path="res://scenes/ball.tscn" id="2_2msfa"]
+[ext_resource type="Texture2D" uid="uid://kv83rbx6650j" path="res://temp_assets/player2.png" id="3_gj5o7"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7s4qf"]
+friction = 0.5
+bounce = 0.8
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1p4y"]
 size = Vector2(2052, 450)
@@ -17,10 +22,10 @@ size = Vector2(450, 1600)
 size = Vector2(2053, 450)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75014"]
-size = Vector2(50, 130)
+size = Vector2(50, 120)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ymghq"]
-size = Vector2(50, 130)
+size = Vector2(50, 120)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1ovxn"]
 size = Vector2(60, 10)
@@ -31,16 +36,20 @@ size = Vector2(60, 10)
 [node name="Pitch" type="Node2D" unique_id=1066713230]
 script = ExtResource("1_dwiy3")
 
-[node name="Player1" parent="." unique_id=950440051 instance=ExtResource("1_jcxhh")]
+[node name="Player1" parent="." unique_id=950440051 groups=["players"] instance=ExtResource("1_jcxhh")]
 position = Vector2(160, 508)
 
-[node name="Player2" parent="." unique_id=1264549729 instance=ExtResource("1_jcxhh")]
+[node name="Player2" parent="." unique_id=1264549729 groups=["players"] instance=ExtResource("1_jcxhh")]
 position = Vector2(992, 508)
 input_prefix = "p2"
 facing_direction = -1.0
 
+[node name="Sprite2D" parent="Player2" index="1" unique_id=961878553]
+texture = ExtResource("3_gj5o7")
+
 [node name="Ball" parent="." unique_id=1018734880 instance=ExtResource("2_2msfa")]
 position = Vector2(576, 300)
+physics_material_override = SubResource("PhysicsMaterial_7s4qf")
 
 [node name="Ground" type="StaticBody2D" parent="." unique_id=248817652]
 collision_mask = 0
@@ -72,14 +81,14 @@ shape = SubResource("RectangleShape2D_iykul")
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GoalLeft" unique_id=911420251]
-position = Vector2(25, 474)
+position = Vector2(25, 479)
 shape = SubResource("RectangleShape2D_75014")
 
 [node name="GoalRight" type="Area2D" parent="." unique_id=1001613810]
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GoalRight" unique_id=140465270]
-position = Vector2(1128, 474)
+position = Vector2(1128, 479)
 shape = SubResource("RectangleShape2D_ymghq")
 
 [node name="GoalLeftRoof" type="StaticBody2D" parent="." unique_id=326324774]
@@ -130,3 +139,5 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 48
 horizontal_alignment = 1
+
+[editable path="Player2"]

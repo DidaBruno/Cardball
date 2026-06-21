@@ -22,6 +22,9 @@ func _process(delta: float) -> void:
 	if not match_over:
 		var seconds_left := int(floor(match_timer.time_left))
 		timer_label.text = str(seconds_left)
+	
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().reload_current_scene()
 
 func _on_goal_left_entered(body: Node) -> void:
 	if body is RigidBody2D and not match_over:
