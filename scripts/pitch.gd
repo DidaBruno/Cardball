@@ -20,7 +20,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if not match_over:
-		var seconds_left := int(ceil(match_timer.time_left))
+		var seconds_left := int(floor(match_timer.time_left))
+		seconds_left = max(seconds_left, 0)
 		timer_label.text = str(seconds_left)
 
 func _on_goal_left_entered(body: Node) -> void:

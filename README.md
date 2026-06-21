@@ -4,8 +4,7 @@ A 4-player card-battler where each duel resolves as a 1v1 Head-Soccer-style matc
 Built in Godot 4 (GDScript). Solo project.
 
 ## Status
-Phase 1 — offline soccer minigame (two characters, gravity, ball, jump/move/kick/dash,
-one goal each, 60s timer, win/draw detection). Local 2-player on one keyboard.
+Phase 2 - ability bar + 3-4 simple abilites (Speedy, Strong Header, Rocket, Laser Pass)
 
 ## Build order
 1. Offline soccer minigame (core feel)
@@ -19,12 +18,12 @@ one goal each, 60s timer, win/draw detection). Local 2-player on one keyboard.
 9. Polish: art, shaders, stadiums, sound
 
 ## Folder layout
-- `scenes/` — Godot scenes (.tscn), grouped by feature
-- `scripts/logic/` — pure game-state functions (no rendering / networking / randomness)
-- `scripts/` — node scripts that drive scenes
-- `assets/` — sprites, audio, shaders
-- `addons/` — plugins (e.g. GodotSteam, added later)
+- `scenes/` - Godot scenes (.tscn), grouped by feature
+- `scripts/logic/` - pure game-state functions (no rendering / networking / randomness)
+- `scripts/` - node scripts that drive scenes
+- `assets/` - sprites, audio, shaders
+- `addons/`- plugins (e.g. GodotSteam, added later)
 
 ## Conventions
-- Keep game logic (state in → new state out) separate from rendering and networking.
+- Keep game logic (state in - new state out) separate from rendering and networking.
 - `snake_case` for files and variables, `PascalCase` for nodes and classes.
