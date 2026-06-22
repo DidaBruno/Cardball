@@ -7,7 +7,17 @@ extends RigidBody2D
 var pop_timer: float = 0.0
 var player_last_touch: Dictionary = {}  # player -> time since last touched
 
+# ability varialbes
+var gravity_override_timer: float = 0.0
+
 func _physics_process(delta: float) -> void:
+	if gravity_override_timer > 0.0:
+		gravity_override_timer -= delta
+		gravity_scale = 0.0
+		linear_velocity.y = 0.0
+	else:
+		gravity_scale = 1.0
+	
 	if pop_timer > 0.0:
 		pop_timer -= delta
 		return
@@ -18,6 +28,7 @@ func _physics_process(delta: float) -> void:
 
 	# Record current-frame contacts
 	var bodies := get_colliding_bodies()
+	
 	for body in bodies:
 		if body.is_in_group("players"):
 			player_last_touch[body] = 0.0
@@ -32,3 +43,7 @@ func _physics_process(delta: float) -> void:
 		apply_central_impulse(Vector2.UP * pop_force)
 		pop_timer = pop_cooldown
 		player_last_touch.clear()
+
+func launch(direction: Vector2, force: float, suppress_gravity_for: float = 0.0) -> void:
+	linear_velocity = direction * force
+	gravity_override_timer = suppress_gravity_for

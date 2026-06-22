@@ -25,6 +25,7 @@ var last_right_press_time: float = -1.0
 var dash_cooldown_timer: float = 0.0
 var external_push: float = 0.0
 
+# ability variables
 var ability_charge: float = 0.0
 var speed_modifier: float = 1.0
 var ability_movement_lock: float = 0.0
@@ -99,7 +100,11 @@ func _try_kick() -> void:
 	for body in kick_zone.get_overlapping_bodies():
 		if body is RigidBody2D:
 			var kick_direction := (body.global_position - global_position).normalized()
-			body.apply_central_impulse(kick_direction * kick_force)
+			var handled := false
+			if ability:
+				handled = ability.on_kick(self, body, kick_direction, kick_force)
+			if not handled and body.has_method("launch"):
+				body.launch(kick_direction, kick_force, 0.0)
 			ability_charge = min(ability_charge + ability_fill_per_kick, 1.0)
 
 func _check_player_push() -> void:

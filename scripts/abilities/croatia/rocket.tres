@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_lha2i")
+ability_name = "Rocket"
 metadata/_custom_type_script = "uid://dk16dbng6uuo7"

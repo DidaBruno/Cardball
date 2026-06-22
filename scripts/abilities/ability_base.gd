@@ -17,6 +17,9 @@ func activate(player: CharacterBody2D) -> void:
 func tick(player: CharacterBody2D, delta: float) -> void:
 	pass
 
+func on_kick(player: CharacterBody2D, ball: RigidBody2D, kick_direction: Vector2, default_force: float) -> bool:
+	return false
+
 func get_time_remaining() -> float:
 	return 0.0
 

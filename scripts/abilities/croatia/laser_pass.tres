@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="LaserPassAbility" format=3 uid="uid://bmi0f6hgwcnac"]
+
+[ext_resource type="Script" uid="uid://c316uepxly7rt" path="res://scripts/abilities/croatia/laser_pass.gd" id="1_7omby"]
+
+[resource]
+script = ExtResource("1_7omby")
+ability_name = "LaserPass"
+metadata/_custom_type_script = "uid://c316uepxly7rt"
