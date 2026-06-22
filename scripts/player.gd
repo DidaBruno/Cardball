@@ -27,6 +27,7 @@ var external_push: float = 0.0
 
 var ability_charge: float = 0.0
 var speed_modifier: float = 1.0
+var ability_movement_lock: float = 0.0
 
 func _ready() -> void:
 	kick_zone.position.x = abs(kick_zone.position.x) * facing_direction
@@ -60,6 +61,10 @@ func _physics_process(delta: float) -> void:
 	if dash_timer > 0.0:
 		dash_timer -= delta
 		velocity.x = dash_direction * dash_speed
+		
+	elif ability_movement_lock > 0.0:
+		ability_movement_lock -= delta
+		# velocity.x stays whatever the ability set it to — don't overwrite
 	
 	# If there are no double taps, move normally
 	else:
