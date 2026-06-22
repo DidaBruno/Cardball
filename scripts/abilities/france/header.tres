@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="HeaderAbility" format=3 uid="uid://bx56xjivjsca"]
+
+[ext_resource type="Script" uid="uid://hmcvebubvh2d" path="res://scripts/abilities/france/header.gd" id="1_eqrkr"]
+
+[resource]
+script = ExtResource("1_eqrkr")
+ability_name = "Header"
+duration = 5.0
+metadata/_custom_type_script = "uid://hmcvebubvh2d"

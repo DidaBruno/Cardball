@@ -17,6 +17,7 @@ extends CharacterBody2D
 
 @onready var kick_zone: Area2D = $KickZone
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var head: Area2D = $Head
 
 var dash_timer: float = 0.0
 var dash_direction: float = 0.0
@@ -80,6 +81,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed(input_prefix + "_kick"):
 		_try_kick()
 	
+	_check_head_contact()
 	_check_player_push()
 	
 	# Ability system
@@ -116,3 +118,11 @@ func _check_player_push() -> void:
 			var other_player: CharacterBody2D = collider
 			var push_direction := (other_player.global_position - global_position).normalized()
 			other_player.external_push += push_direction.x * push_force * get_physics_process_delta_time()
+
+func _check_head_contact() -> void:
+	if not ability:
+		return
+	for body in head.get_overlapping_bodies():
+		if body is RigidBody2D:
+			var contact_direction := (body.global_position - global_position).normalized()
+			ability.on_head_contact(self, body, contact_direction)

@@ -20,6 +20,9 @@ func tick(player: CharacterBody2D, delta: float) -> void:
 func on_kick(player: CharacterBody2D, ball: RigidBody2D, kick_direction: Vector2, default_force: float) -> bool:
 	return false
 
+func on_head_contact(player: CharacterBody2D, ball: RigidBody2D, contact_direction: Vector2) -> bool:
+	return false
+
 func get_time_remaining() -> float:
 	return 0.0
 

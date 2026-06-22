@@ -9,6 +9,9 @@ size = Vector2(40, 60)
 [sub_resource type="CircleShape2D" id="CircleShape2D_y1p4y"]
 radius = 25.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_he2tf"]
+size = Vector2(44, 40)
+
 [node name="Player" type="CharacterBody2D" unique_id=950440051 groups=["players"]]
 collision_layer = 2
 collision_mask = 3
@@ -24,8 +27,16 @@ texture = ExtResource("2_g2els")
 
 [node name="KickZone" type="Area2D" parent="." unique_id=369936069]
 position = Vector2(25, 0)
-collision_mask = 5
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KickZone" unique_id=1892684469]
 position = Vector2(4, 5)
 shape = SubResource("CircleShape2D_y1p4y")
+
+[node name="Head" type="Area2D" parent="." unique_id=1357763645]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head" unique_id=1595403351]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_he2tf")
+debug_color = Color(5.77569e-06, 0.63421935, 0.43519703, 0.41960785)
