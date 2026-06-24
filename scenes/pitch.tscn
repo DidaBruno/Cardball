@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dg5os33emlcoa" path="res://scenes/ball.tscn" id="2_2msfa"]
 [ext_resource type="Texture2D" uid="uid://kv83rbx6650j" path="res://temp_assets/player2.png" id="3_gj5o7"]
 [ext_resource type="Resource" uid="uid://jakurp1p6p0i" path="res://scripts/abilities/france/speedy.tres" id="3_ngpjf"]
-[ext_resource type="Resource" uid="uid://bx56xjivjsca" path="res://scripts/abilities/france/header.tres" id="3_y53wt"]
+[ext_resource type="Resource" uid="uid://bmi0f6hgwcnac" path="res://scripts/abilities/croatia/laser_pass.tres" id="3_y53wt"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7s4qf"]
 friction = 0.5
@@ -40,13 +40,13 @@ script = ExtResource("1_dwiy3")
 
 [node name="Player1" parent="." unique_id=950440051 instance=ExtResource("1_jcxhh")]
 position = Vector2(160, 508)
-ability = ExtResource("3_y53wt")
+ability = ExtResource("3_ngpjf")
 
 [node name="Player2" parent="." unique_id=1264549729 instance=ExtResource("1_jcxhh")]
 position = Vector2(992, 508)
 input_prefix = "p2"
 facing_direction = -1.0
-ability = ExtResource("3_ngpjf")
+ability = ExtResource("3_y53wt")
 
 [node name="Sprite2D" parent="Player2" index="1" unique_id=961878553]
 texture = ExtResource("3_gj5o7")

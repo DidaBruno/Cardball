@@ -4,7 +4,7 @@ A 4-player card-battler where each duel resolves as a 1v1 Head-Soccer-style matc
 Built in Godot 4 (GDScript). Solo project.
 
 ## Status
-Phase 2 - ability bar + 3-4 simple abilites (Speedy, Strong Header, Rocket, Laser Pass)
+Phase 3 - Card game layer, playing offline turns, dealing cards and state machine
 
 ## Build order
 1. Offline soccer minigame (core feel)

@@ -1,7 +1,7 @@
 class_name LaserPassAbility
 extends Ability
 
-@export var laser_force: float = 2000.0
+@export var laser_force: float = 3000.0
 @export var window_duration: float = 5.0
 @export var flat_duration: float = 0.6
 
