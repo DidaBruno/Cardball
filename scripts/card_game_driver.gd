@@ -1,5 +1,7 @@
 extends Control
 
+signal duel_requested
+
 var state: CardGameState
 @onready var state_label: Label = $StateLabel
 @onready var hand_label: Label = $HandLabel
@@ -7,11 +9,13 @@ var state: CardGameState
 @onready var choice_buttons: VBoxContainer = $ChoiceButtons
 
 func _ready() -> void:
-	var deck := DeckBuilder.build_full_deck()
-	deck.shuffle()
+	pass
 
-	state = CardGameState.new()
-	state.setup(4, deck, ["Bruno", "David", "Ivo", "Fabijan"])
+func bind_state(game_state: CardGameState) -> void:
+	state = game_state
+	_refresh()
+
+func refresh() -> void:
 	_refresh()
 
 # Clear and rebuild the choice buttons for the current phase.
@@ -27,7 +31,7 @@ func _rebuild_buttons() -> void:
 		CardGameState.Phase.PICK_CARD:
 			for i in state.hands[state.active_player].size():
 				var card: Card = state.hands[state.active_player][i]
-				_add_button("%s (%s)" % [card.player_name, card.country], _on_pick_card.bind(i))
+				_add_button("%s (%s)" % [card.player_name, card.country], _on_pick_card.bind(i), card.is_special)
 
 		CardGameState.Phase.PICK_OPPONENT:
 			for i in state.player_count:
@@ -37,21 +41,28 @@ func _rebuild_buttons() -> void:
 		CardGameState.Phase.OPPONENT_PICKS:
 			for i in state.hands[state.target_player].size():
 				var card: Card = state.hands[state.target_player][i]
-				_add_button("%s (%s)" % [card.player_name, card.country], _on_opponent_pick.bind(i))
+				_add_button("%s (%s)" % [card.player_name, card.country], _on_opponent_pick.bind(i), card.is_special)
 
 		CardGameState.Phase.REVEAL:
-			# manual winner choice for testing
-			_add_button("%s wins" % state.name_of(state.active_player), _on_resolve.bind(state.active_player))
-			_add_button("%s wins" % state.name_of(state.target_player), _on_resolve.bind(state.target_player))
-			_add_button("Draw", _on_resolve.bind(-1))
+			_add_button("Start Duel!", _on_start_duel)
 
 		CardGameState.Phase.RESOLVED:
 			_add_button("Next turn", _on_next_turn)
 
-func _add_button(label: String, callback: Callable) -> void:
+func _add_button(label: String, callback: Callable, is_special: bool = false) -> void:
 	var btn := Button.new()
 	btn.text = label
 	btn.pressed.connect(callback)
+	
+	# temporary way to highlight special cards
+	if is_special:
+		var style := StyleBoxFlat.new()
+		style.bg_color = Color(0.2, 0.4, 0.9)  # blue background
+		style.set_corner_radius_all(4)
+		btn.add_theme_stylebox_override("normal", style)
+		btn.add_theme_stylebox_override("hover", style)
+		btn.add_theme_stylebox_override("pressed", style)
+		btn.add_theme_color_override("font_color", Color.WHITE)  # readable on blue
 	choice_buttons.add_child(btn)
 
 # Button callbacks
@@ -67,9 +78,8 @@ func _on_opponent_pick(index: int) -> void:
 	state.opponent_pick_card(index)
 	_refresh()
 
-func _on_resolve(winner_index: int) -> void:
-	state.resolve_duel(winner_index)
-	_refresh()
+func _on_start_duel() -> void:
+	duel_requested.emit()
 
 func _on_next_turn() -> void:
 	var reshuffled: Array = []

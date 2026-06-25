@@ -112,7 +112,7 @@ scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_mo4ti")
 
 [node name="MatchTimer" type="Timer" parent="." unique_id=1022424422]
-wait_time = 60.0
+wait_time = 30.0
 one_shot = true
 
 [node name="TimerLabel" type="Label" parent="." unique_id=389818637]
@@ -207,5 +207,13 @@ offset_right = 1144.0
 offset_bottom = 90.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 24
+
+[node name="VersusLabel" type="Label" parent="." unique_id=291768296]
+offset_left = 505.0
+offset_top = 61.0
+offset_right = 641.0
+offset_bottom = 84.0
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
 
 [editable path="Player2"]

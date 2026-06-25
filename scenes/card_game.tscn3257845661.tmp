@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://cekk57tyhnutd"]
+
+[ext_resource type="Script" uid="uid://c06bl3s7opr1u" path="res://scripts/card_game_driver.gd" id="1_hvbmy"]
+
+[node name="CardGame" type="Control" unique_id=422848831]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_hvbmy")
+
+[node name="StateLabel" type="Label" parent="." unique_id=962668079]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 19.0
+offset_right = 90.0
+offset_bottom = 84.0
+
+[node name="HandLabel" type="Label" parent="." unique_id=250056781]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 92.0
+offset_right = 93.0
+offset_bottom = 157.0
+
+[node name="InfoLabel" type="Label" parent="." unique_id=1408440327]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 176.0
+offset_right = 93.0
+offset_bottom = 228.0
+
+[node name="ActionButton" type="Button" parent="." unique_id=1923160886]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 250.0
+offset_right = 87.0
+offset_bottom = 272.0
+
+[node name="ChoiceButtons" type="VBoxContainer" parent="." unique_id=1100221040]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 298.0
+offset_right = 265.0
+offset_bottom = 367.0

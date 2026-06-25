@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://evolrv4gpjf3"]
+
+[ext_resource type="Script" uid="uid://cehnb80ra4a74" path="res://scripts/game_coordinator.gd" id="1_1xsw7"]
+[ext_resource type="PackedScene" uid="uid://cekk57tyhnutd" path="res://scenes/card_game.tscn" id="2_gukss"]
+[ext_resource type="PackedScene" uid="uid://bbok7alv502ku" path="res://scenes/pitch.tscn" id="3_mtke6"]
+
+[node name="GameCoordinator" type="Node" unique_id=880656880]
+script = ExtResource("1_1xsw7")
+
+[node name="CardGame" parent="." unique_id=422848831 instance=ExtResource("2_gukss")]
+
+[node name="Pitch" parent="." unique_id=1066713230 instance=ExtResource("3_mtke6")]

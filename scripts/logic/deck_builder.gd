@@ -7,23 +7,28 @@ extends RefCounted
 
 static func build_full_deck() -> Array:
 	var deck: Array = []
-
+	
+	var speedy: Ability = load("res://scripts/abilities/france/speedy.tres")
+	var strong_header: Ability = load("res://scripts/abilities/france/header.tres")
+	var rocket: Ability = load("res://scripts/abilities/croatia/rocket.tres")
+	var laser_pass: Ability = load("res://scripts/abilities/croatia/laser_pass.tres")
+	
 	# ability names per country, last one is the special card
-	var ability_styles := {
-		"Brazil":  ["Hulk", "Spikes", "Rainbow Flick", "Magic Trick", "Curve Ball"],
-		"Croatia": ["Rocket", "Second Wind", "Laser Pass", "Check Mate", "Fireball"],
-		"Japan":   ["Mirror", "Reset", "Tiny Ball", "Flood", "Invisibility"],
-		"France":  ["Speedy", "Strong Header", "Fake Out", "Baguette", "Teleport"],
+	var country_abilities := {
+		"Brazil":  [null, null, null, null, null],
+		"Croatia": [rocket, laser_pass, null,  null, null],
+		"Japan":   [null, null, null, null, null],
+		"France":  [speedy, strong_header, null, null, null],
 	}
 
-	for country in ability_styles:
+	for country in country_abilities:
+		var abilities: Array = country_abilities[country]
 		for i in 5:
 			var card := Card.new()
-			card.player_name = country + " " + str(i + 1) # temp names like Brazil 1
+			card.player_name = country + " " + str(i + 1)
 			card.country = country
-			card.is_special = (i == 4) # 5th card is the special
-			# player_image left null for now
-			# ability left null for now
+			card.is_special = (i == 4)
+			card.ability = abilities[i]   # may be null
 			deck.append(card)
 
 	return deck
