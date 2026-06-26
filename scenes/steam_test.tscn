@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b5gglxq28vlwa"]
+
+[ext_resource type="Script" uid="uid://8bbgbvs0asba" path="res://scripts/steam_test.gd" id="1_hq7l2"]
+
+[node name="SteamTest" type="Node" unique_id=1759426414]
+script = ExtResource("1_hq7l2")
