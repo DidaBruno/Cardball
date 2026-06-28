@@ -39,6 +39,7 @@ func _on_lobby_created(connect_result: int, this_lobby_id: int) -> void:
 		lobby_id = this_lobby_id
 		print("Lobby created successfully! Lobby ID: ", lobby_id)
 		print("Give this ID to the other machine to join.")
+		_refresh_lobby_members()
 	else:
 		print("Lobby creation FAILED. Result code: ", connect_result)
 
@@ -47,11 +48,13 @@ func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, resp
 		lobby_id = this_lobby_id
 		print("Joined lobby successfully! Lobby ID: ", lobby_id)
 		print("Members in lobby: ", Steam.getNumLobbyMembers(lobby_id))
+		_refresh_lobby_members()
 	else:
 		print("Failed to join lobby. Response code: ", response)
 
 func _on_create_pressed() -> void:
 	create_lobby()
+	
 
 func _on_join_pressed() -> void:
 	var id_text: String = $LobbyIdinput.text
@@ -73,6 +76,8 @@ func _refresh_lobby_members() -> void:
 
 # Sends a small test message to every other member of the lobby
 func _on_send_pressed() -> void:
+	print("Send button clicked!")
+	print(lobby_members)
 	var my_id: int = Steam.getSteamID()
 	
 	# Data is packed into a Dictionary so it can be packed into bytes because
