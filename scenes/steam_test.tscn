@@ -26,5 +26,9 @@ offset_right = 202.0
 offset_bottom = 143.0
 placeholder_text = "Enter Lobby ID"
 
+[node name="SendMessageButton" type="Button" parent="." unique_id=1769692071]
+offset_right = 8.0
+offset_bottom = 8.0
+
 [connection signal="pressed" from="CreateLobbyButton" to="." method="_on_create_pressed"]
 [connection signal="pressed" from="JoinLobbyButton" to="." method="_on_join_pressed"]
