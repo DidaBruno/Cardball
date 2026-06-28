@@ -12,6 +12,7 @@ func _ready() -> void:
 	# Fires whenever someone tries to open a P2P connenction with me
 	# It must be accepted  or their packets get silently dropped
 	Steam.p2p_session_request.connect(_on_p2p_session_request)
+	Steam.lobby_chat_update.connect(_on_lobby_chat_update)
 
 	$CreateLobbyButton.pressed.connect(_on_create_pressed)
 	$JoinLobbyButton.pressed.connect(_on_join_pressed)
@@ -103,3 +104,8 @@ func _read_all_p2p_packets() -> void:
 			var readable: Dictionary = bytes_to_var(data)
 			print("RECEIVED from ", sender_id, ": ", readable)
 		packet_size = Steam.getAvailableP2PPacketSize(0)
+
+# Fires whenever lobby membership changes - someone joins, leaves, or disconnects.
+func _on_lobby_chat_update(_this_lobby_id: int, _change_id: int, _making_change_id: int, _chat_state: int) -> void:
+	print("Lobby membership changed, refreshing member list...")
+	_refresh_lobby_members()
