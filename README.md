@@ -22,8 +22,7 @@ Phase 5 - Networking - connect card game layer using Steamworks lobbies and P2PÅ
 - `scripts/logic/` - pure game-state functions (no rendering / networking / randomness)
 - `scripts/` - node scripts that drive scenes
 - `assets/` - sprites, audio, shaders
-- `addons/`- plugins (e.g. GodotSteam, added later)
+- `addons/`- plugins (e.g. GodotSteam)
 
-## Conventions
-- Keep game logic (state in - new state out) separate from rendering and networking.
-- `snake_case` for files and variables, `PascalCase` for nodes and classes.
+#
+Copyright (c) 2026 Bruno DidoviÄ‡. All rights reserved.
