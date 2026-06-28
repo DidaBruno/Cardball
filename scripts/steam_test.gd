@@ -40,6 +40,6 @@ func _on_create_pressed() -> void:
 	create_lobby()
 
 func _on_join_pressed() -> void:
-	var id_text: String = $LineEdit.text
+	var id_text: String = $LobbyIdinput.text
 	if id_text.is_valid_int():
 		join_lobby(id_text.to_int())
