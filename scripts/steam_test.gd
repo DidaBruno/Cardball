@@ -8,7 +8,9 @@ func _ready() -> void:
 	print("Steam init result: ", init_result)
 
 	Steam.lobby_created.connect(_on_lobby_created)
-	Steam.lobby_joined.connect(_on_lobby_joined)
+	Steam.lobby_joined.connect(_on_lobby_joined)	
+	# Fires whenever someone tries to open a P2P connenction with me
+	# It must be accepted  or their packets get silently dropped
 	Steam.p2p_session_request.connect(_on_p2p_session_request)
 
 	$CreateLobbyButton.pressed.connect(_on_create_pressed)
@@ -16,7 +18,12 @@ func _ready() -> void:
 	$SendMessageButton.pressed.connect(_on_send_pressed)
 
 func _process(_delta: float) -> void:
-	Steam.run_callbacks() # required every frame or signals never fire
+	# Steam callbacks (lobby_created, p2p_session_request, etc.) only 
+	# fire if this callback function is called on every frame
+	Steam.run_callbacks()
+	
+	# Someone wants to open a P2P channel with me. Accept it so future
+	# packets from them actually arrive instead of being dropped
 	_read_all_p2p_packets()
 
 func create_lobby() -> void:
@@ -64,8 +71,12 @@ func _refresh_lobby_members() -> void:
 		lobby_members.append(member_id)
 	print("Lobby members refreshed: ", lobby_members.size())
 
+# Sends a small test message to every other member of the lobby
 func _on_send_pressed() -> void:
 	var my_id: int = Steam.getSteamID()
+	
+	# Data is packed into a Dictionary so it can be packed into bytes because
+	# the network only understands raw bytes
 	var payload: Dictionary = {"message": "Hello from " + Steam.getPersonaName()}
 	var data: PackedByteArray = var_to_bytes(payload)
 
@@ -74,6 +85,8 @@ func _on_send_pressed() -> void:
 			Steam.sendP2PPacket(member_id, data, Steam.P2P_SEND_RELIABLE, 0)
 			print("Sent message to: ", member_id)
 
+# Checks Steam's incoming packet queue and processes everything waiting
+# every single frame
 func _read_all_p2p_packets() -> void:
 	var packet_size: int = Steam.getAvailableP2PPacketSize(0)
 	while packet_size > 0:
@@ -81,6 +94,7 @@ func _read_all_p2p_packets() -> void:
 		if packet.size() > 0:
 			var sender_id: int = packet["remote_steam_id"]
 			var data: PackedByteArray = packet["data"]
+			# the data is unpacked from bytes back to useable data (dictionary)
 			var readable: Dictionary = bytes_to_var(data)
 			print("RECEIVED from ", sender_id, ": ", readable)
 		packet_size = Steam.getAvailableP2PPacketSize(0)
