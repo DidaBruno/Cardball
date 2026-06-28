@@ -35,3 +35,4 @@ text = "Send message"
 
 [connection signal="pressed" from="CreateLobbyButton" to="." method="_on_create_pressed"]
 [connection signal="pressed" from="JoinLobbyButton" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="SendMessageButton" to="." method="_on_send_pressed"]
