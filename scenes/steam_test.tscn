@@ -6,18 +6,24 @@
 script = ExtResource("1_hq7l2")
 
 [node name="CreateLobbyButton" type="Button" parent="." unique_id=440227742]
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 202.0
+offset_bottom = 63.0
 text = "Create Lobby"
 
 [node name="JoinLobbyButton" type="Button" parent="." unique_id=1873559525]
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 32.0
+offset_top = 72.0
+offset_right = 202.0
+offset_bottom = 103.0
 text = "Join Lobby"
 
 [node name="LobbyIdinput" type="LineEdit" parent="." unique_id=1190595230]
-offset_right = 68.5
-offset_bottom = 31.0
+offset_left = 32.0
+offset_top = 112.0
+offset_right = 202.0
+offset_bottom = 143.0
 placeholder_text = "Enter Lobby ID"
 
 [connection signal="pressed" from="CreateLobbyButton" to="." method="_on_create_pressed"]
